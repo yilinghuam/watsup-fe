@@ -1,0 +1,21 @@
+@import '~antd/dist/antd.css';
+.App {
+  background-color: bisque;
+}
+.ant-menu-inline{
+    width: 100%;
+}
+.ant-space-horizontal{
+    .ant-space-item{
+        flex:1;
+        .ant-form-item{
+            flex:1;
+            .ant-input-number{
+                min-width: 100%;
+            }
+        }
+    }
+    .ant-space-item:last-child{
+        flex:0
+    }
+}
