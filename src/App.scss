@@ -5,17 +5,29 @@
 .ant-menu-inline{
     width: 100%;
 }
-.ant-space-horizontal{
-    .ant-space-item{
-        flex:1;
-        .ant-form-item{
+
+// form setup alignment
+#set-up-form{
+    .ant-space-horizontal{
+        .ant-space-item{
             flex:1;
-            .ant-input-number{
-                min-width: 100%;
+            .ant-form-item{
+                flex:1;
+                .ant-input-number{
+                    min-width: 100%;
+                }
             }
         }
+        .ant-space-item:last-child{
+            flex:0
+        }
     }
-    .ant-space-item:last-child{
-        flex:0
+    
+    // form setup button alignment
+    .ant-form-item-control-input{
+        .ant-form-item-control-input-content{
+            display: flex;
+            justify-content: flex-end;
+        }
     }
 }
