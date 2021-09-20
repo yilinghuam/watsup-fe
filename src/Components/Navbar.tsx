@@ -6,12 +6,19 @@ import {
   MailOutlined,
   CalendarOutlined,
 } from "@ant-design/icons";
+import { useCookies } from "react-cookie";
 import { Link } from "react-router-dom";
 const { SubMenu } = Menu;
 
 export const Navbar = () => {
   const handleClick = (e: MenuInfo) => {
     console.log("click ", e);
+  };
+  const [cookies, setCookie, removeCookie] = useCookies(["UserAuth"]);
+  const logout = () => {
+    removeCookie("UserAuth");
+
+    console.log(cookies);
   };
 
   return (
@@ -36,7 +43,7 @@ export const Navbar = () => {
           <Link to="/dashboard-view">View Groupbuy</Link>
         </Menu.Item>
         <Menu.Item key="5">
-          <Link to="/dashboard-profile">Profile</Link>
+          <a onClick={logout}>Logout</a>
         </Menu.Item>
       </SubMenu>
     </Menu>

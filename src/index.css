@@ -18,7 +18,38 @@ code {
     flex:1;
     min-height: 100vh;
 }
-.ant-layout.ant-layout-has-sider {
+.ant-layout.ant-layout-has-sider{
     min-height: 100vh;
     flex:1
 }
+/* #components-form-demo-normal-login .login-form {
+    max-width: 300px;
+  }
+  #components-form-demo-normal-login .login-form-forgot {
+    float: right;
+  }
+  #components-form-demo-normal-login .ant-col-rtl .login-form-forgot {
+    float: left;
+  }
+  #components-form-demo-normal-login .login-form-button {
+    width: 100%;
+  } */
+
+  .ant-carousel .slick-prev,
+  .ant-carousel .slick-next {
+    color: unset;
+    font-size: unset;
+  }
+  
+  .ant-carousel .slick-prev:hover,
+  .ant-carousel .slick-next:hover,
+  .ant-carousel .slick-prev:focus,
+  .ant-carousel .slick-next:focus {
+    color: unset;
+  }
+
+  .ant-carousel .slick-prev,
+  .ant-carousel .slick-next {
+    color: black !important;
+    font-size: 20px !important
+  }

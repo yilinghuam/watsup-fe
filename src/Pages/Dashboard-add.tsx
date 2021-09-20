@@ -11,9 +11,12 @@ import { pineappleImg } from "../Assets";
 import { Formconfig } from "../Interfaces/Dashboard";
 import { Button, Row } from "antd";
 import moment from "moment";
+import { useCookies } from "react-cookie";
 import axios from "axios";
 
 export const DashboardAdd = () => {
+  const [cookies] = useCookies(["UserAuth"]);
+
   type stageread = (name: number) => void;
 
   const [stageNumber, setStageNumber] = useState(0);
@@ -47,18 +50,17 @@ export const DashboardAdd = () => {
     // post data to backend here
     console.log(confirmedData);
     axios
-      .post("http://localhost:8000/dashboard-add", confirmedData, {
-        headers: {
-          user: "ling",
-        },
+      .post("http://localhost:8000/auth/dashboard-add", confirmedData, {
+        headers: { Authorization: `Bearer ${cookies.UserAuth}` },
       })
       .then((response) => {
         console.log("item updated!");
+        setForm({ Details: {}, Setup: [] });
+        setStageNumber(0);
       })
       .catch((err) => {
         console.log(err);
       });
-    setForm({ Details: {}, Setup: [] });
   };
 
   return (

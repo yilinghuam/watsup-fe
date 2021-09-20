@@ -12,7 +12,7 @@ export const SingleContent = (props: { children: React.ReactNode }) => {
         borderRadius: "10vh",
       }}
     >
-      <Col span={18} style={{ margin: "4%" }}>
+      <Col span={20} style={{ margin: "4%" }}>
         {props.children}
       </Col>
     </Row>

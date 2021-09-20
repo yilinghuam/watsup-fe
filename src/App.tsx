@@ -1,7 +1,7 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.scss";
-import { DashboardAdd, DashboardView, Groupbuy } from "./Pages";
+import { DashboardAdd, DashboardView, Groupbuy, Landing } from "./Pages";
 
 function App() {
   return (
@@ -16,6 +16,9 @@ function App() {
           </Route>
           <Route path="/groupbuy">
             <Groupbuy />
+          </Route>
+          <Route path="/">
+            <Landing />
           </Route>
         </Switch>
       </div>

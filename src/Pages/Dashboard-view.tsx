@@ -4,19 +4,23 @@ import { SingleContent } from "../Components";
 import { pinkPineapple } from "../Assets";
 import { Row } from "antd";
 import { DashboardViewConfig } from "../Interfaces/Dashboard";
+import { useCookies } from "react-cookie";
 import axios from "axios";
 
 export const DashboardView = () => {
   //get all groupbuy that are open
+  const [cookies] = useCookies(["UserAuth"]);
+
   const [dashboard, setDashboard] = useState<DashboardViewConfig>({
     host: [],
     user: [],
   });
   useEffect(() => {
     // get user data first
+    console.log(cookies.UserAuth);
     axios
-      .get("http://localhost:8000/dashboard-view", {
-        headers: { user: "ling" },
+      .get("http://localhost:8000/auth/dashboard-view", {
+        headers: { Authorization: `Bearer ${cookies.UserAuth}` },
       })
       .then((response) => {
         console.log(response.data);
