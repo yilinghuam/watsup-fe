@@ -31,53 +31,6 @@ export const DashboardView = () => {
       });
   }, [0]);
 
-  //   const sampleData: DashboardViewConfig = {
-  //     host: [
-  //       {
-  //         name: "pineapple waiting long long",
-  //         order_date: "13-08-2021",
-  //         status: "open",
-  //       },
-  //       {
-  //         name: "mooncakes",
-  //         order_date: "15-08-2021",
-  //         status: "closed",
-  //       },
-  //       {
-  //         name: "pineapple",
-  //         order_date: "20-08-2021",
-  //         status: "collected",
-  //       },
-  //       {
-  //         name: "pineapple",
-  //         order_date: "22-08-2021",
-  //         status: "open",
-  //       },
-  //     ],
-  //     user: [
-  //       {
-  //         name: "pineapple waiting long long",
-  //         order_date: "13-08-2021",
-  //         status: "awaiting payment",
-  //       },
-  //       {
-  //         name: "mooncakes",
-  //         order_date: "15-08-2021",
-  //         status: "collected",
-  //       },
-  //       {
-  //         name: "pineapple",
-  //         order_date: "20-08-2021",
-  //         status: "order successful",
-  //       },
-  //       {
-  //         name: "pineapple",
-  //         order_date: "22-08-2021",
-  //         status: "payment failed",
-  //       },
-  //     ],
-  //   };
-
   return (
     <NavLayout background={pinkPineapple}>
       <SingleContent>

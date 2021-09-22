@@ -5,8 +5,8 @@ import {
   FormDetails,
   FormSetup,
   Review,
+  SingleContent,
 } from "../Components";
-import { SingleContent } from "../Components";
 import { pineappleImg } from "../Assets";
 import { Formconfig } from "../Interfaces/Dashboard";
 import { Button, Row } from "antd";

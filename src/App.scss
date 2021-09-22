@@ -31,3 +31,27 @@
         }
     }
 }
+.events{
+    padding-inline-start: 0px !important;
+    span{
+        font-size: "50%"!important;
+    }
+    .ant-badge-status-text{
+        font-size: "50%"!important;
+
+    }
+}
+// change fullcalender button
+.fc-toolbar-chunk{
+    .fc-button-primary{
+        color:black !important;
+        background-color: white !important;
+        border:none
+    }
+}
+
+#order-form{
+    .ant-space-item{
+        flex:1
+    }
+}

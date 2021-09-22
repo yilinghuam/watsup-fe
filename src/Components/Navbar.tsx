@@ -1,10 +1,10 @@
 import React from "react";
-import { Menu } from "antd";
+import { Menu, Avatar, Row } from "antd";
 import { MenuInfo } from "rc-menu/lib/interface";
 import {
   AppstoreOutlined,
   MailOutlined,
-  CalendarOutlined,
+  UserOutlined,
 } from "@ant-design/icons";
 import { useCookies } from "react-cookie";
 import { Link } from "react-router-dom";
@@ -15,8 +15,11 @@ export const Navbar = () => {
     console.log("click ", e);
   };
   const [cookies, setCookie, removeCookie] = useCookies(["UserAuth"]);
+  const [userCookies, setUserCookie] = useCookies(["User"]);
+  console.log(userCookies.User);
   const logout = () => {
-    removeCookie("UserAuth");
+    console.log("hihi");
+    removeCookie("UserAuth", { path: "/" });
 
     console.log(cookies);
   };
@@ -29,11 +32,23 @@ export const Navbar = () => {
       defaultOpenKeys={["sub1"]}
       mode="inline"
     >
+      <Menu.Item
+        style={{ textAlign: "center", height: "10%", paddingTop: "10%" }}
+        key="sub1"
+      >
+        <Row justify="center" align="middle">
+          <Avatar
+            size={{ xs: 24, sm: 32, md: 40, lg: 64, xl: 80, xxl: 100 }}
+            icon={<UserOutlined />}
+          />
+        </Row>
+        <Row justify="center" align="middle" style={{ fontStyle: "italic" }}>
+          {userCookies.User}
+        </Row>
+      </Menu.Item>
+
       <Menu.Item key="1" icon={<MailOutlined />}>
         <Link to="/groupbuy">Groupbuy</Link>
-      </Menu.Item>
-      <Menu.Item key="2" icon={<CalendarOutlined />}>
-        <Link to="/calendar">Calendar</Link>
       </Menu.Item>
       <SubMenu key="sub1" icon={<AppstoreOutlined />} title="Dashboard">
         <Menu.Item key="3">

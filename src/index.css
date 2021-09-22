@@ -53,3 +53,13 @@ code {
     color: black !important;
     font-size: 20px !important
   }
+  /* .ant-picker-calendar-header .ant-radio-group {
+    display: none !important
+}
+.ant-picker-calendar-header{
+    justify-content:flex-start !important;
+    background-color: "none" !important
+}
+.ant-badge .ant-badge-status .ant-badge-not-a-wrapper{
+    font-size: "50%" !important;
+} */

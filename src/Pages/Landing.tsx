@@ -4,11 +4,14 @@ import { pinkPineapple, pineappleTrio } from "../Assets";
 import { Row, Image, Col } from "antd";
 import { GoogleLogin } from "react-google-login";
 import { useCookies } from "react-cookie";
+import { useHistory } from "react-router";
 import axios from "axios";
 
 export const Landing = () => {
   const [cookies, setCookie] = useCookies(["EmailAuth"]);
   const [authCookies, setAuthCookie] = useCookies(["UserAuth"]);
+  const [userCookies, setUserCookie] = useCookies(["User"]);
+  const history = useHistory();
 
   const handleLogin = async (googleData: any) => {
     console.log(googleData);
@@ -28,7 +31,9 @@ export const Landing = () => {
         }
         if (Object.keys(response.data).includes("UserAuth")) {
           setAuthCookie("UserAuth", response.data.UserAuth);
+          setUserCookie("User", response.data.User);
         }
+        history.push("/groupbuy");
       })
       .catch((err) => {
         console.log(err);
