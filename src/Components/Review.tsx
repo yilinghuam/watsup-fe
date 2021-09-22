@@ -57,8 +57,8 @@ export const Review = (props: { formValues: Formconfig }) => {
         description: currentvalue,
       };
       if (currentvalue !== undefined) {
-        if (currentkey === "order-date" || currentkey === "closing-date") {
-          pushedValue.description = moment(currentvalue).format("YYYY-MM-DD");
+        if (currentkey === "order_date" || currentkey === "closing_date") {
+          pushedValue.description = moment(currentvalue).format("DD-MM-YYYY");
         }
         if (typeof currentvalue === "boolean") {
           pushedValue.description = currentvalue.toString();

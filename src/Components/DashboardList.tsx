@@ -1,5 +1,6 @@
 import React from "react";
 import { List, Col, Tag, Space, Typography } from "antd";
+import { Link } from "react-router-dom";
 import { ViewConfig } from "../Interfaces/Dashboard";
 const { Title } = Typography;
 
@@ -36,7 +37,9 @@ export const DashboardList = (props: {
           <List.Item>
             <List.Item.Meta
               avatar={<div>[{item["order_date"]}]</div>}
-              title={<a href="https://ant.design">{item.name}</a>}
+              title={
+                <Link to={`/groupbuy/${item.groupbuy_id}`}>{item.name}</Link>
+              }
             />
             <Space>
               <div style={{ width: "6vw" }}>

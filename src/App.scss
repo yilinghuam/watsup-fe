@@ -55,3 +55,18 @@
         flex:1
     }
 }
+.ant-table-thead > tr > th, .ant-table-tbody > tr > td, .ant-table tfoot > tr > th, .ant-table tfoot > tr > td{
+    background-color: white;
+}
+.orderTable > table{
+    font-size: 80% !important;
+    
+    .ant-dropdown-menu-item, .ant-dropdown-menu-submenu-title{
+        font-size: 80% !important;
+    }
+}
+.orderTable {
+    .ant-btn > span{
+        font-size: 80% !important;
+    }
+}

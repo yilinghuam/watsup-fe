@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Table, Tag, Space } from "antd";
+import { Table, Dropdown, Button, Space, Menu } from "antd";
 import { useParams } from "react-router";
 import { useCookies } from "react-cookie";
+import { DownOutlined } from "@ant-design/icons";
+
 import axios from "axios";
 
 export const ViewOrderTable = (props: { data: any }) => {
@@ -9,6 +11,8 @@ export const ViewOrderTable = (props: { data: any }) => {
   let { id } = useParams<Record<string, string | undefined>>();
   const [columnData, setColumnData] = useState<Array<string>>([]);
   const [info, setInfo] = useState<Array<any>>([]);
+  const [refresh, setRefresh] = useState<number>(0);
+  const [orderId, setOrderId] = useState<number>(0);
 
   useEffect(() => {
     let newData = props.data.map((elem: any, index: number) => {
@@ -17,6 +21,10 @@ export const ViewOrderTable = (props: { data: any }) => {
     newData = newData.flat();
     console.log(newData);
     setColumnData(newData);
+    let insertInfo: Array<any> = [];
+    let insert_id = 0;
+    let insertObject: any = {};
+    let insertPrice = 0;
     axios
       .get(`http://localhost:8000/auth/groupbuy/${id}/view`, {
         headers: { Authorization: `Bearer ${cookies.UserAuth}` },
@@ -27,10 +35,7 @@ export const ViewOrderTable = (props: { data: any }) => {
 
         // // combine according to order_id
         console.log(data);
-        let insertInfo = [];
-        let insert_id = 0;
-        let insertObject: any = {};
-        let insertPrice = 0;
+
         for (let i = 0; i < data.length; i++) {
           if (data[i].Order_id !== insert_id) {
             if (i !== 0) {
@@ -63,15 +68,74 @@ export const ViewOrderTable = (props: { data: any }) => {
               insertInfo.push(insertObject);
             }
           }
+          console.log(insertInfo);
         }
+        axios
+          .get(`http://localhost:8000/auth/groupbuy/${id}/orderstatus`, {
+            headers: { Authorization: `Bearer ${cookies.UserAuth}` },
+          })
+          .then((response) => {
+            console.log(insertInfo);
+
+            console.log(response.data);
+            let orderstatus = response.data;
+            orderstatus.forEach((elem: string, index: number) => {
+              console.log(insertInfo[1]);
+              insertInfo[index]["Status"] = elem;
+            });
+            console.log(insertInfo);
+            setInfo(insertInfo);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
         console.log(insertInfo);
-        setInfo(insertInfo);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [refresh]);
+  function handleMenuClick(e: any) {
+    console.log(orderId);
 
+    axios
+      .patch(
+        `http://localhost:8000/auth/groupbuy/${orderId}/editorderstatus`,
+        { Status: e.key },
+        {
+          headers: { Authorization: `Bearer ${cookies.UserAuth}` },
+        }
+      )
+      .then((response) => {
+        console.log("groupbuy!");
+        setRefresh(refresh + 1);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+  function handleDeleteClick(order_id: number) {
+    console.log(order_id);
+    axios
+      .delete(`http://localhost:8000/auth/groupbuy/${order_id}/deleteorder`, {
+        headers: { Authorization: `Bearer ${cookies.UserAuth}` },
+      })
+      .then((response) => {
+        console.log(response.data);
+        setRefresh(refresh + 1);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+  const menu = (
+    <Menu onClick={handleMenuClick}>
+      <Menu.Item key="awaiting payment">awaiting payment</Menu.Item>
+      <Menu.Item key="order successful">order successful</Menu.Item>
+      <Menu.Item key="payment failed">payment failed</Menu.Item>
+      <Menu.Item key="payment failed">collected</Menu.Item>
+    </Menu>
+  );
   let columns: any = [
     {
       title: "Order_id",
@@ -106,15 +170,30 @@ export const ViewOrderTable = (props: { data: any }) => {
     key: "Total Price",
   });
   columns.push({
+    title: "Status",
+    dataIndex: "Status",
+    key: "Status",
+  });
+  columns.push({
     title: "Action",
     key: "action",
     render: (text: any, record: any) => (
       <Space size="middle">
-        <a>Invite {record.name}</a>
-        <a>Delete</a>
+        <Dropdown overlay={menu}>
+          <Button
+            type="primary"
+            onClick={(e) => {
+              console.log(record.Order_id);
+              setOrderId(record.Order_id);
+            }}
+          >
+            status <DownOutlined />
+          </Button>
+        </Dropdown>
+        <a onClick={(e) => handleDeleteClick(record.Order_id)}>Delete</a>
       </Space>
     ),
   });
 
-  return <Table columns={columns} dataSource={info} />;
+  return <Table className="orderTable" columns={columns} dataSource={info} />;
 };

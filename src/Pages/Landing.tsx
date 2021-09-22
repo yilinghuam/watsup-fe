@@ -38,18 +38,8 @@ export const Landing = () => {
       .catch((err) => {
         console.log(err);
       });
-    // store returned user somehow
   };
-  function onChange(a: number) {
-    console.log(a);
-  }
 
-  const contentStyle: any = {
-    height: "500px",
-    lineHeight: "500px",
-    textAlign: "center",
-    background: "transparent",
-  };
   return (
     <WithoutNavLayout background={pinkPineapple}>
       <SingleContent>

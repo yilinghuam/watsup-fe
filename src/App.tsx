@@ -34,6 +34,7 @@ function App() {
           <Route path="/groupbuy">
             <Groupbuy />
           </Route>
+
           <Route path="/">
             <Landing />
           </Route>

@@ -4,18 +4,20 @@ import {
   OrderForm,
   SingleContent,
   GroupbuyInfo,
+  ViewOrderTable,
 } from "../Components";
 import { greenPineapple } from "../Assets";
-import { Row, Col, Button, Space } from "antd";
+import { DownOutlined } from "@ant-design/icons";
+import { Row, Col, Button, Space, Dropdown, Menu } from "antd";
 import { useCookies } from "react-cookie";
 import axios from "axios";
 import { useParams, useHistory } from "react-router";
-import { ViewOrderTable } from "../Components/ViewOrderTable";
 
 export const GroupbuyView = () => {
   const history = useHistory();
   const [cookies] = useCookies(["UserAuth"]);
   const [userCookies] = useCookies(["User"]);
+  const [refresh, setRefresh] = useState<number>(0);
   let { id } = useParams<Record<string, string | undefined>>();
 
   const [viewStatus, setViewStatus] = useState<string>("View orders");
@@ -42,7 +44,8 @@ export const GroupbuyView = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [refresh]);
+
   const deleteGroupbuyHandler = () => {
     axios
       .delete(`http://localhost:8000/auth/groupbuy/${id}/delete`, {
@@ -56,6 +59,34 @@ export const GroupbuyView = () => {
         console.log(err);
       });
   };
+
+  function handleMenuClick(e: any) {
+    console.log("click", e);
+    console.log(e.key);
+    axios
+      .patch(
+        `http://localhost:8000/auth/groupbuy/${id}/editstatus`,
+        { Status: e.key },
+        {
+          headers: { Authorization: `Bearer ${cookies.UserAuth}` },
+        }
+      )
+      .then((response) => {
+        console.log("groupbuy!");
+        setRefresh(refresh + 1);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  const menu = (
+    <Menu onClick={handleMenuClick}>
+      <Menu.Item key="open">open</Menu.Item>
+      <Menu.Item key="close">close</Menu.Item>
+      <Menu.Item key="collected">collected</Menu.Item>
+    </Menu>
+  );
 
   return (
     <NavLayout background={greenPineapple}>
@@ -79,7 +110,11 @@ export const GroupbuyView = () => {
                   </Button>
                 </Col>
                 <Col>
-                  <Button type="primary">Change groupbuy status</Button>
+                  <Dropdown overlay={menu}>
+                    <Button type="primary">
+                      Change groupbuy status <DownOutlined />
+                    </Button>
+                  </Dropdown>
                 </Col>
               </>
             )}
@@ -90,7 +125,10 @@ export const GroupbuyView = () => {
         ) : (
           <>
             <GroupbuyInfo data={data.GroupbuyInfo} />
-            <Row justify="start">
+            <Row
+              justify="start"
+              style={{ maxWidth: "100%", overflow: "scroll" }}
+            >
               {viewStatus === "Add orders" ? (
                 <ViewOrderTable data={data.HostItemInfo} />
               ) : (
@@ -100,6 +138,7 @@ export const GroupbuyView = () => {
                     background: "white",
                     padding: "2%",
                     borderRadius: "5%",
+                    width: "100%",
                   }}
                 >
                   <OrderForm

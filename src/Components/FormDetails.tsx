@@ -9,6 +9,7 @@ import {
   RadioChangeEvent,
 } from "antd";
 import { Formconfig } from "../Interfaces/Dashboard";
+import moment from "moment";
 
 export const FormDetails = (props: {
   formValues: Formconfig;
@@ -34,9 +35,17 @@ export const FormDetails = (props: {
     props.setStage(1);
   };
 
-  let initialValues = {};
+  let initialValues: any = {};
   if (Object.keys(props.formValues.Details).length !== 0) {
     initialValues = { ...props.formValues.Details };
+    initialValues["order_date"] = moment(
+      initialValues["order_date"],
+      "DD-MM-YYYY"
+    );
+    initialValues["closing_date"] = moment(
+      initialValues["closing_date"],
+      "DD-MM-YYYY"
+    );
   } else {
     initialValues = {};
   }
