@@ -26,7 +26,7 @@ export const ViewOrderTable = (props: { data: any }) => {
     let insertObject: any = {};
     let insertPrice = 0;
     axios
-      .get(`${process.env.BACKEND_URL}/auth/groupbuy/${id}/view`, {
+      .get(`${process.env.REACT_APP_BACKEND_URL}/auth/groupbuy/${id}/view`, {
         headers: { Authorization: `Bearer ${cookies.UserAuth}` },
       })
       .then((response) => {
@@ -71,9 +71,12 @@ export const ViewOrderTable = (props: { data: any }) => {
           console.log(insertInfo);
         }
         axios
-          .get(`${process.env.BACKEND_URL}/auth/groupbuy/${id}/orderstatus`, {
-            headers: { Authorization: `Bearer ${cookies.UserAuth}` },
-          })
+          .get(
+            `${process.env.REACT_APP_BACKEND_URL}/auth/groupbuy/${id}/orderstatus`,
+            {
+              headers: { Authorization: `Bearer ${cookies.UserAuth}` },
+            }
+          )
           .then((response) => {
             console.log(insertInfo);
 
@@ -100,7 +103,7 @@ export const ViewOrderTable = (props: { data: any }) => {
 
     axios
       .patch(
-        `${process.env.BACKEND_URL}/auth/groupbuy/${orderId}/editorderstatus`,
+        `${process.env.REACT_APP_BACKEND_URL}/auth/groupbuy/${orderId}/editorderstatus`,
         { Status: e.key },
         {
           headers: { Authorization: `Bearer ${cookies.UserAuth}` },
@@ -118,7 +121,7 @@ export const ViewOrderTable = (props: { data: any }) => {
     console.log(order_id);
     axios
       .delete(
-        `${process.env.BACKEND_URL}/auth/groupbuy/${order_id}/deleteorder`,
+        `${process.env.REACT_APP_BACKEND_URL}/auth/groupbuy/${order_id}/deleteorder`,
         {
           headers: { Authorization: `Bearer ${cookies.UserAuth}` },
         }

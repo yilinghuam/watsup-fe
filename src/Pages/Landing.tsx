@@ -1,4 +1,5 @@
 import React from "react";
+import dotenv from "dotenv";
 import { WithoutNavLayout, SingleContent } from "../Components";
 import { pinkPineapple, pineappleTrio } from "../Assets";
 import { Row, Image, Col } from "antd";
@@ -19,7 +20,7 @@ export const Landing = () => {
     console.log(googleData.tokenId);
     // verify token id
     axios
-      .post(`${process.env.BACKEND_URL}/login`, {
+      .post(`${process.env.REACT_APP_BACKEND_URL}/login`, {
         token: googleData.tokenId,
       })
       .then((response) => {
@@ -39,7 +40,7 @@ export const Landing = () => {
         console.log(err);
       });
   };
-
+  console.log(`${process.env.REACT_APP_GOOGLE_CLIENTID}`);
   return (
     <WithoutNavLayout background={pinkPineapple}>
       <SingleContent>
@@ -53,7 +54,7 @@ export const Landing = () => {
           <Row justify={"center"} gutter={[16, 16]}>
             <Col>
               <GoogleLogin
-                clientId={`${process.env.GOOGLE_CLIENTID}`}
+                clientId={`${process.env.REACT_APP_GOOGLE_CLIENTID}`}
                 buttonText="Log in/Sign up with Google"
                 onSuccess={handleLogin}
                 onFailure={handleLogin}

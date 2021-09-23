@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+
 import {
   GroupbuyFullCalendar,
   NavLayout,
@@ -17,7 +18,7 @@ export const Groupbuy = () => {
 
   useEffect(() => {
     axios
-      .get(`${process.env.BACKEND_URL}/groupbuy`)
+      .get(`${process.env.REACT_APP_BACKEND_URL}/groupbuy`)
       .then((response) => {
         console.log(response.data);
         setOpenGroupbuys(response.data);

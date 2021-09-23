@@ -3,6 +3,7 @@ import { Form, Button, Space, InputNumber, Input } from "antd";
 import { useState } from "react";
 import { useCookies } from "react-cookie";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 const { TextArea } = Input;
 
 export const OrderForm = (props: { data: any; delivery: any }) =>
@@ -13,6 +14,7 @@ export const OrderForm = (props: { data: any; delivery: any }) =>
     const [orderValues, setOrderValues] = useState<any>(false);
     const [form] = Form.useForm();
     const [cookies, setCookies] = useCookies(["UserAuth"]);
+    const history = useHistory();
 
     const onFinish = (values: any) => {
       let toFormat = [...values.order_form];
@@ -39,11 +41,16 @@ export const OrderForm = (props: { data: any; delivery: any }) =>
       }
       console.log(finalValue);
       axios
-        .post(`${process.env.BACKEND_URL}/auth/groupbuy/orders`, finalValue, {
-          headers: { Authorization: `Bearer ${cookies.UserAuth}` },
-        })
+        .post(
+          `${process.env.REACT_APP_BACKEND_URL}/auth/groupbuy/orders`,
+          finalValue,
+          {
+            headers: { Authorization: `Bearer ${cookies.UserAuth}` },
+          }
+        )
         .then((response) => {
           console.log(response.data);
+          history.push("/dashboard-view");
         })
         .catch((err) => {
           console.log(err);

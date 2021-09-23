@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+
 import {
   NavLayout,
   OrderForm,
@@ -34,7 +35,7 @@ export const GroupbuyView = () => {
     // get user data first
     console.log(cookies.UserAuth);
     axios
-      .get(`${process.env.BACKEND_URL}/groupbuy/${id}`, {
+      .get(`${process.env.REACT_APP_BACKEND_URL}/groupbuy/${id}`, {
         headers: { Authorization: `Bearer ${cookies.UserAuth}` },
       })
       .then((response) => {
@@ -48,9 +49,12 @@ export const GroupbuyView = () => {
 
   const deleteGroupbuyHandler = () => {
     axios
-      .delete(`${process.env.BACKEND_URL}/auth/groupbuy/${id}/delete`, {
-        headers: { Authorization: `Bearer ${cookies.UserAuth}` },
-      })
+      .delete(
+        `${process.env.REACT_APP_BACKEND_URL}/auth/groupbuy/${id}/delete`,
+        {
+          headers: { Authorization: `Bearer ${cookies.UserAuth}` },
+        }
+      )
       .then((response) => {
         console.log(response.data);
         history.push("/groupbuy");
@@ -65,7 +69,7 @@ export const GroupbuyView = () => {
     console.log(e.key);
     axios
       .patch(
-        `${process.env.BACKEND_URL}/auth/groupbuy/${id}/editstatus`,
+        `${process.env.REACT_APP_BACKEND_URL}/auth/groupbuy/${id}/editstatus`,
         { Status: e.key },
         {
           headers: { Authorization: `Bearer ${cookies.UserAuth}` },

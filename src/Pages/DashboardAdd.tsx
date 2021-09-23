@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import {
   NavLayout,
   ProgressSteps,
@@ -12,10 +13,12 @@ import { Formconfig } from "../Interfaces/Dashboard";
 import { Button, Row } from "antd";
 import moment from "moment";
 import { useCookies } from "react-cookie";
+import { useHistory } from "react-router";
 import axios from "axios";
 
 export const DashboardAdd = () => {
   const [cookies] = useCookies(["UserAuth"]);
+  const history = useHistory();
 
   type stageread = (name: number) => void;
 
@@ -50,13 +53,18 @@ export const DashboardAdd = () => {
     // post data to backend here
     console.log(confirmedData);
     axios
-      .post(`${process.env.BACKEND_URL}/auth/dashboard-add`, confirmedData, {
-        headers: { Authorization: `Bearer ${cookies.UserAuth}` },
-      })
+      .post(
+        `${process.env.REACT_APP_BACKEND_URL}/auth/dashboard-add`,
+        confirmedData,
+        {
+          headers: { Authorization: `Bearer ${cookies.UserAuth}` },
+        }
+      )
       .then((response) => {
         console.log("item updated!");
         setForm({ Details: {}, Setup: [] });
         setStageNumber(0);
+        history.push("/dashboard-view");
       })
       .catch((err) => {
         console.log(err);

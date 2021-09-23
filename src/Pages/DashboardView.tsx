@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+
 import { NavLayout, DashboardList } from "../Components";
 import { SingleContent } from "../Components";
 import { pinkPineapple } from "../Assets";
@@ -19,7 +20,7 @@ export const DashboardView = () => {
     // get user data first
     console.log(cookies.UserAuth);
     axios
-      .get(`${process.env.BACKEND_URL}/auth/dashboard-view`, {
+      .get(`${process.env.REACT_APP_BACKEND_URL}/auth/dashboard-view`, {
         headers: { Authorization: `Bearer ${cookies.UserAuth}` },
       })
       .then((response) => {
