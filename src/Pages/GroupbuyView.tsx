@@ -134,7 +134,10 @@ export const GroupbuyView = () => {
               style={{ maxWidth: "100%", overflow: "scroll" }}
             >
               {viewStatus === "Add orders" ? (
-                <ViewOrderTable data={data.HostItemInfo} />
+                <ViewOrderTable
+                  data={data.HostItemInfo}
+                  owner={data.GroupbuyInfo.User_id}
+                />
               ) : (
                 <Col
                   span={16}

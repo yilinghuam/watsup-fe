@@ -6,8 +6,10 @@ import { DownOutlined } from "@ant-design/icons";
 
 import axios from "axios";
 
-export const ViewOrderTable = (props: { data: any }) => {
+export const ViewOrderTable = (props: { data: any; owner: string }) => {
   const [cookies, setCookies] = useCookies(["UserAuth"]);
+  const [userCookies, setUserCookies] = useCookies(["User"]);
+
   let { id } = useParams<Record<string, string | undefined>>();
   const [columnData, setColumnData] = useState<Array<string>>([]);
   const [info, setInfo] = useState<Array<any>>([]);
@@ -185,26 +187,28 @@ export const ViewOrderTable = (props: { data: any }) => {
     dataIndex: "Status",
     key: "Status",
   });
-  columns.push({
-    title: "Action",
-    key: "action",
-    render: (text: any, record: any) => (
-      <Space size="middle">
-        <Dropdown overlay={menu}>
-          <Button
-            type="primary"
-            onClick={(e) => {
-              console.log(record.Order_id);
-              setOrderId(record.Order_id);
-            }}
-          >
-            status <DownOutlined />
-          </Button>
-        </Dropdown>
-        <a onClick={(e) => handleDeleteClick(record.Order_id)}>Delete</a>
-      </Space>
-    ),
-  });
+  if (props.owner === userCookies.User) {
+    columns.push({
+      title: "Action",
+      key: "action",
+      render: (text: any, record: any) => (
+        <Space size="middle">
+          <Dropdown overlay={menu}>
+            <Button
+              type="primary"
+              onClick={(e) => {
+                console.log(record.Order_id);
+                setOrderId(record.Order_id);
+              }}
+            >
+              status <DownOutlined />
+            </Button>
+          </Dropdown>
+          <a onClick={(e) => handleDeleteClick(record.Order_id)}>Delete</a>
+        </Space>
+      ),
+    });
+  }
 
   return <Table className="orderTable" columns={columns} dataSource={info} />;
 };
