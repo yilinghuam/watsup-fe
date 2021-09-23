@@ -15,18 +15,12 @@ export const Landing = () => {
   const history = useHistory();
 
   const handleLogin = async (googleData: any) => {
-    console.log(googleData);
-    console.log(googleData.profileObj.email);
-    console.log(googleData.tokenId);
     // verify token id
     axios
       .post(`${process.env.REACT_APP_BACKEND_URL}/login`, {
         token: googleData.tokenId,
       })
       .then((response) => {
-        console.log("login!");
-        console.log(response);
-        console.log(response.data);
         if (Object.keys(response.data).includes("EmailAuth")) {
           setCookie("EmailAuth", response.data.EmailAuth);
         }

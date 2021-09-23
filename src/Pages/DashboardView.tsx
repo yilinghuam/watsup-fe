@@ -38,6 +38,7 @@ export const DashboardView = () => {
         <Row justify="space-between">
           <DashboardList title="Hosted groupbuy" data={dashboard.host} />
           <DashboardList title="Ordered" data={dashboard.user} />
+          {console.log(dashboard.user)}
         </Row>
       </SingleContent>
     </NavLayout>
