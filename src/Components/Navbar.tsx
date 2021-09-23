@@ -7,10 +7,11 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import { useCookies } from "react-cookie";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 const { SubMenu } = Menu;
 
 export const Navbar = () => {
+  const history = useHistory();
   const handleClick = (e: MenuInfo) => {
     console.log("click ", e);
   };
@@ -18,10 +19,8 @@ export const Navbar = () => {
   const [userCookies, setUserCookie] = useCookies(["User"]);
   console.log(userCookies.User);
   const logout = () => {
-    console.log("hihi");
     removeCookie("UserAuth", { path: "/" });
-
-    console.log(cookies);
+    history.push("/");
   };
 
   return (
