@@ -23,7 +23,10 @@ export const Groupbuy = () => {
         console.log(response.data);
         setOpenGroupbuys(response.data);
         setSelected(response.data);
-        setOptions(response.data.map((ele: any) => ele.User_id));
+        let options = response.data.map((ele: any) => ele.User_id);
+        let formatted: Set<string> = new Set(options);
+        let finalformat: Array<string> = Array.from(formatted);
+        setOptions(finalformat);
       })
       .catch((err) => {
         console.log(err);
