@@ -58,6 +58,11 @@ export const ViewOrderTable = (props: { data: any }) => {
               insertPrice = 0;
               insertInfo.push(insertObject);
             }
+            if (i === data.length - 1) {
+              insertObject["Total Price"] = insertPrice;
+              insertPrice = 0;
+              insertInfo.push(insertObject);
+            }
           } else {
             insertPrice += data[i].Price;
             insertObject[`${data[i].Item}`] = data[i].Quantity;

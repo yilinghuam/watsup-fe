@@ -40,7 +40,6 @@ export const Landing = () => {
         console.log(err);
       });
   };
-  console.log(`${process.env.REACT_APP_GOOGLE_CLIENTID}`);
   return (
     <WithoutNavLayout background={pinkPineapple}>
       <SingleContent>
