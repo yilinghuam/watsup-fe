@@ -34,7 +34,7 @@ export const GroupbuyView = () => {
     // get user data first
     console.log(cookies.UserAuth);
     axios
-      .get(`http://localhost:8000/groupbuy/${id}`, {
+      .get(`${process.env.BACKEND_URL}/groupbuy/${id}`, {
         headers: { Authorization: `Bearer ${cookies.UserAuth}` },
       })
       .then((response) => {
@@ -48,7 +48,7 @@ export const GroupbuyView = () => {
 
   const deleteGroupbuyHandler = () => {
     axios
-      .delete(`http://localhost:8000/auth/groupbuy/${id}/delete`, {
+      .delete(`${process.env.BACKEND_URL}/auth/groupbuy/${id}/delete`, {
         headers: { Authorization: `Bearer ${cookies.UserAuth}` },
       })
       .then((response) => {
@@ -65,7 +65,7 @@ export const GroupbuyView = () => {
     console.log(e.key);
     axios
       .patch(
-        `http://localhost:8000/auth/groupbuy/${id}/editstatus`,
+        `${process.env.BACKEND_URL}/auth/groupbuy/${id}/editstatus`,
         { Status: e.key },
         {
           headers: { Authorization: `Bearer ${cookies.UserAuth}` },

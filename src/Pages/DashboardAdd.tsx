@@ -50,7 +50,7 @@ export const DashboardAdd = () => {
     // post data to backend here
     console.log(confirmedData);
     axios
-      .post("http://localhost:8000/auth/dashboard-add", confirmedData, {
+      .post(`${process.env.BACKEND_URL}/auth/dashboard-add`, confirmedData, {
         headers: { Authorization: `Bearer ${cookies.UserAuth}` },
       })
       .then((response) => {

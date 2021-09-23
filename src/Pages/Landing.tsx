@@ -19,7 +19,7 @@ export const Landing = () => {
     console.log(googleData.tokenId);
     // verify token id
     axios
-      .post("http://localhost:8000/login", {
+      .post(`${process.env.BACKEND_URL}/login`, {
         token: googleData.tokenId,
       })
       .then((response) => {
@@ -53,9 +53,7 @@ export const Landing = () => {
           <Row justify={"center"} gutter={[16, 16]}>
             <Col>
               <GoogleLogin
-                clientId={
-                  "118723902684-csndh1evv68kjef55vi98ukhmsmludk4.apps.googleusercontent.com"
-                }
+                clientId={`${process.env.GOOGLE_CLIENTID}`}
                 buttonText="Log in/Sign up with Google"
                 onSuccess={handleLogin}
                 onFailure={handleLogin}

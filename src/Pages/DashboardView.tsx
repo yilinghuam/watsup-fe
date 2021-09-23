@@ -19,7 +19,7 @@ export const DashboardView = () => {
     // get user data first
     console.log(cookies.UserAuth);
     axios
-      .get("http://localhost:8000/auth/dashboard-view", {
+      .get(`${process.env.BACKEND_URL}/auth/dashboard-view`, {
         headers: { Authorization: `Bearer ${cookies.UserAuth}` },
       })
       .then((response) => {

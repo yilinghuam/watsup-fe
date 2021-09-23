@@ -17,7 +17,7 @@ export const Groupbuy = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/groupbuy")
+      .get(`${process.env.BACKEND_URL}/groupbuy`)
       .then((response) => {
         console.log(response.data);
         setOpenGroupbuys(response.data);

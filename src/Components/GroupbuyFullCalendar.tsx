@@ -23,14 +23,9 @@ export const GroupbuyFullCalendar = (props: { data: any }) => {
     console.log(formatData);
   }, [props.data]);
 
-  const handleDateClick = (arg: any) => {
-    // bind with an arrow function
-    alert(arg.dateStr);
-  };
   return (
     <FullCalendar
       plugins={[dayGridPlugin, interactionPlugin]}
-      dateClick={handleDateClick}
       contentHeight={"auto"}
       events={event}
       headerToolbar={{

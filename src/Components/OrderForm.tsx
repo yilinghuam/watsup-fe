@@ -39,7 +39,7 @@ export const OrderForm = (props: { data: any; delivery: any }) =>
       }
       console.log(finalValue);
       axios
-        .post(`http://localhost:8000/auth/groupbuy/orders`, finalValue, {
+        .post(`${process.env.BACKEND_URL}/auth/groupbuy/orders`, finalValue, {
           headers: { Authorization: `Bearer ${cookies.UserAuth}` },
         })
         .then((response) => {

@@ -26,7 +26,7 @@ export const ViewOrderTable = (props: { data: any }) => {
     let insertObject: any = {};
     let insertPrice = 0;
     axios
-      .get(`http://localhost:8000/auth/groupbuy/${id}/view`, {
+      .get(`${process.env.BACKEND_URL}/auth/groupbuy/${id}/view`, {
         headers: { Authorization: `Bearer ${cookies.UserAuth}` },
       })
       .then((response) => {
@@ -71,7 +71,7 @@ export const ViewOrderTable = (props: { data: any }) => {
           console.log(insertInfo);
         }
         axios
-          .get(`http://localhost:8000/auth/groupbuy/${id}/orderstatus`, {
+          .get(`${process.env.BACKEND_URL}/auth/groupbuy/${id}/orderstatus`, {
             headers: { Authorization: `Bearer ${cookies.UserAuth}` },
           })
           .then((response) => {
@@ -100,7 +100,7 @@ export const ViewOrderTable = (props: { data: any }) => {
 
     axios
       .patch(
-        `http://localhost:8000/auth/groupbuy/${orderId}/editorderstatus`,
+        `${process.env.BACKEND_URL}/auth/groupbuy/${orderId}/editorderstatus`,
         { Status: e.key },
         {
           headers: { Authorization: `Bearer ${cookies.UserAuth}` },
@@ -117,9 +117,12 @@ export const ViewOrderTable = (props: { data: any }) => {
   function handleDeleteClick(order_id: number) {
     console.log(order_id);
     axios
-      .delete(`http://localhost:8000/auth/groupbuy/${order_id}/deleteorder`, {
-        headers: { Authorization: `Bearer ${cookies.UserAuth}` },
-      })
+      .delete(
+        `${process.env.BACKEND_URL}/auth/groupbuy/${order_id}/deleteorder`,
+        {
+          headers: { Authorization: `Bearer ${cookies.UserAuth}` },
+        }
+      )
       .then((response) => {
         console.log(response.data);
         setRefresh(refresh + 1);
