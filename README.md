@@ -23,7 +23,7 @@ A groupbuy platform to facilitate the easy buying of goods and services from nei
    * JWT token
    * echo framework
    * mysql driver - sql handling
-* Server: Mysql
+* Database: Mysql
 ---------
 ## Restful routes
 |No.|Route      | URL                   | HTTP Verb |Description
